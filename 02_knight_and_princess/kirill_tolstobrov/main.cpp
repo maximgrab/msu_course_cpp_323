@@ -194,5 +194,5 @@ int main() {
     file.close();
   }
 
-  return "error";
+  return 0;
 }
