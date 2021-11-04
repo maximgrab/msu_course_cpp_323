@@ -4,7 +4,6 @@
 #include <iterator>
 #include <map>
 #include <vector>
-#include <array>
 
 using VertexId = int;
 using EdgeId = int;
