@@ -1,4 +1,4 @@
-#include "graph_generation_params.h"
+#include "graph_generation_params.hpp"
 
 Graph GraphGenerator::generate() const {
   std::random_device rd;

@@ -1,5 +1,4 @@
-#ifndef GRAPH_GENERATION_PARAMS_H
-#define GRAPH_GENERATION_PARAMS_H
+#pragma once
 
 #include "graph.hpp"
 
@@ -41,5 +40,3 @@ class GraphGenerator {
 
   const Params params_ = Params();
 };
-
-#endif  // GRAPH_GENERATION_PARAMS_H

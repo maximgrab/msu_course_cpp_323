@@ -1,5 +1,5 @@
 #include "graph.hpp"
-#include "graph_generation_params.h"
+#include "graph_generation_params.hpp"
 #include "graph_printer.hpp"
 
 #include <fstream>
