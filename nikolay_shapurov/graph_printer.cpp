@@ -1,5 +1,9 @@
 #include "graph_printer.hpp"
 
+#include <map>
+
+namespace uni_cource_cpp {
+
 GraphPrinter::GraphPrinter(const Graph& graph) : graph_(graph) {}
 
 std::string GraphPrinter::print() const {
@@ -17,7 +21,8 @@ std::string GraphPrinter::print() const {
   if (!edges_string.empty())
     edges_string.pop_back();
 
-  return "{\"vertices\":[" + vertices_string + "],\"edges\":[" + edges_string +
+  return "{\"depth\": " + std::to_string(graph_.get_graph_depth()) +
+         ",\"vertices\":[" + vertices_string + "],\"edges\":[" + edges_string +
          "]}\n";
 }
 
@@ -34,10 +39,16 @@ std::string GraphPrinter::print_vertex(const Vertex& vertex) const {
     vertex_edges_json.pop_back();
   }
 
-  return result + vertex_edges_json + "]},";
+  return result + vertex_edges_json +
+         "], \"depth\": " + std::to_string(vertex.depth) + " },";
 }
 
 std::string GraphPrinter::print_edge(const Edge& edge) const {
+  static const std::map<Edge::Color, std::string> color_names = {
+      {Edge::Color::Grey, "grey"},
+      {Edge::Color::Green, "green"},
+      {Edge::Color::Yellow, "yellow"},
+      {Edge::Color::Red, "red"}};
   std::string result;
   result += "{\"id\":";
   result += std::to_string(edge.id);
@@ -46,5 +57,7 @@ std::string GraphPrinter::print_edge(const Edge& edge) const {
   result += ",";
   result += std::to_string(edge.to_vertex_id);
 
-  return result + "]},";
+  return result + "], \"color\": \"" + color_names.at(edge.color) + "\"},";
 }
+
+}  // namespace uni_cource_cpp

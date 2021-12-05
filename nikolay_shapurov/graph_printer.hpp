@@ -3,6 +3,8 @@
 #include <string>
 #include "graph.hpp"
 
+namespace uni_cource_cpp {
+
 class GraphPrinter {
  public:
   GraphPrinter(const Graph& graph);
@@ -14,3 +16,5 @@ class GraphPrinter {
  private:
   const Graph& graph_;
 };
+
+}  // namespace uni_cource_cpp
