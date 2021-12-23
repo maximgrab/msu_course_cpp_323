@@ -27,7 +27,7 @@ void write_to_file(const std::string& graph_json,
 }
 
 int handle_depth_input() {
-  while (1) {
+  while (true) {
     std::cout << "Enter graph max depth (0..): ";
     int depth = 0;
     std::cin >> depth;
@@ -38,7 +38,7 @@ int handle_depth_input() {
 }
 
 int handle_graphs_count_input() {
-  while (1) {
+  while (true) {
     std::cout << "Enter graph count (1..): ";
     int count = 0;
     std::cin >> count;
@@ -49,7 +49,7 @@ int handle_graphs_count_input() {
 }
 
 int handle_new_vertices_num_input() {
-  while (1) {
+  while (true) {
     std::cout << "Enter graph new vertices number (0..): ";
     int new_vertices_num = 0;
     std::cin >> new_vertices_num;

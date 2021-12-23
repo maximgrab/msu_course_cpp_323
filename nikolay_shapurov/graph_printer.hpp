@@ -11,6 +11,7 @@ class GraphPrinter {
   std::string print() const;
 
   std::string print_vertex(const Vertex& vertex) const;
+  std::map print_edge_color(Edge& edge, std::string color);
   std::string print_edge(const Edge& edge) const;
 
  private:
