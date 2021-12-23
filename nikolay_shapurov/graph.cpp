@@ -112,8 +112,7 @@ const Edge& Graph::get_edge(const EdgeId& id) const {
 }
 
 int Graph::get_vertex_depth(const VertexId& vertex_id) const {
-  const Vertex& v = get_vertex(vertex_id);
-  return v.depth;
+    return get_vertex(vertex_id).depth;
 }
 
 void Graph::set_adding_vertex_depth(const int depth) {
