@@ -44,7 +44,7 @@ const std::vector<EdgeId>& Graph::get_edge_ids(const VertexId& id) const {
   return adjacency_map_.at(id);
 }
 
-int Graph::get_graph_depth() const {
+int Graph::depth() const {
   int depth = 0;
   for (const Vertex& v : vertices_) {
     if (depth < v.depth) {

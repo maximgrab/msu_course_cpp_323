@@ -19,9 +19,8 @@ std::string GraphPrinter::print() const {
   if (!edges_string.empty())
     edges_string.pop_back();
 
-  return "{\"depth\": " + std::to_string(graph_.get_graph_depth()) +
-         ",\"vertices\":[" + vertices_string + "],\"edges\":[" + edges_string +
-         "]}\n";
+  return "{\"depth\": " + std::to_string(graph_.depth()) + ",\"vertices\":[" +
+         vertices_string + "],\"edges\":[" + edges_string + "]}\n";
 }
 
 std::string GraphPrinter::print_vertex(const Vertex& vertex) const {

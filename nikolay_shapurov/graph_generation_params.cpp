@@ -73,7 +73,7 @@ void GraphGenerator::add_green_edges(Graph& graph,
 void GraphGenerator::add_yellow_edges(Graph& graph,
                                       std::mt19937& generator) const {
   const int diff_depth = 1;
-  const int graph_depth = graph.get_graph_depth();
+  const int graph_depth = graph.depth();
   for (const Vertex& from_vertex : graph.vertices()) {
     if (from_vertex.depth < graph_depth) {
       if (gen_attempt(from_vertex.depth, params_.depth - diff_depth,

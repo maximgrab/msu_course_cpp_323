@@ -40,7 +40,7 @@ class Graph {
   const std::vector<Edge>& edges() const { return edges_; }
   const std::vector<EdgeId>& get_edge_ids(const VertexId& id) const;
 
-  int get_graph_depth() const;
+  int depth() const;
   int get_vertex_depth(const VertexId& vertex_id) const;
   void set_adding_vertex_depth(const int depth);
   Edge::Color get_edge_color(const EdgeId& edge_id) const;
