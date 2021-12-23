@@ -36,11 +36,11 @@ std::vector<VertexId> GraphGenerator::gen_layer(Graph& graph,
                                                 VertexId parent_id,
                                                 int current_layer,
                                                 std::mt19937& generator) const {
+  double probability = (params_.depth - current_layer + 1) / params_.depth;
   graph.set_adding_vertex_depth(current_layer);
   std::vector<VertexId> child_ids;
   for (int attempt = 0; attempt < params_.new_vertices_num; attempt++) {
-    if (gen_attempt((params_.depth - current_layer + 1), params_.depth,
-                    generator)) {
+    if (gen_attempt(probability, generator)) {
       graph.add_vertex();
       VertexId child_id = graph.vertices().back().id;
       child_ids.emplace_back(child_id);
@@ -51,20 +51,17 @@ std::vector<VertexId> GraphGenerator::gen_layer(Graph& graph,
   return child_ids;
 }
 
-bool GraphGenerator::gen_attempt(int positive_outcomes,
-                                 int attempts_num,
+bool GraphGenerator::gen_attempt(double probability,
                                  std::mt19937& generator) const {
-  std::bernoulli_distribution d(static_cast<double>(positive_outcomes) /
-                                attempts_num);
+  std::bernoulli_distribution d(probability);
   return d(generator);
 }
 
 void GraphGenerator::add_green_edges(Graph& graph,
                                      std::mt19937& generator) const {
-  const int successful_case = 1;
-  const int total_case = 10;
+  const double probability = 0.1;
   for (const Vertex& vertex : graph.vertices()) {
-    if (gen_attempt(successful_case, total_case, generator)) {
+    if (gen_attempt(probability, generator)) {
       graph.add_edge(vertex.id, vertex.id);
     }
   }
@@ -76,8 +73,8 @@ void GraphGenerator::add_yellow_edges(Graph& graph,
   const int graph_depth = graph.depth();
   for (const Vertex& from_vertex : graph.vertices()) {
     if (from_vertex.depth < graph_depth) {
-      if (gen_attempt(from_vertex.depth, params_.depth - diff_depth,
-                      generator)) {
+      double probability = from_vertex.depth / (params_.depth - diff_depth);
+      if (gen_attempt(probability, generator)) {
         VertexId to_vertex_id;
         if (get_vertex_id_on_distance(graph, from_vertex, diff_depth,
                                       to_vertex_id)) {
@@ -90,11 +87,10 @@ void GraphGenerator::add_yellow_edges(Graph& graph,
 
 void GraphGenerator::add_red_edges(Graph& graph,
                                    std::mt19937& generator) const {
-  const int successful_case = 1;
-  const int total_case = 3;
+  const double probability = 0.33;
   const int diff_depth = 2;
   for (const Vertex& from_vertex : graph.vertices()) {
-    if (gen_attempt(successful_case, total_case, generator)) {
+    if (gen_attempt(probability, generator)) {
       VertexId to_vertex_id;
       if (get_vertex_id_on_distance(graph, from_vertex, diff_depth,
                                     to_vertex_id)) {

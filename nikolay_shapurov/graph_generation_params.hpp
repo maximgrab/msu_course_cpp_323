@@ -27,9 +27,7 @@ class GraphGenerator {
                                   VertexId parent_id,
                                   int current_layer,
                                   std::mt19937& generator) const;
-  bool gen_attempt(int positive_outcomes,
-                   int attempts_num,
-                   std::mt19937& generator) const;
+  bool gen_attempt(double probability, std::mt19937& generator) const;
   void add_green_edges(Graph& graph, std::mt19937& generator) const;
   void add_yellow_edges(Graph& graph, std::mt19937& generator) const;
   void add_red_edges(Graph& graph, std::mt19937& generator) const;
