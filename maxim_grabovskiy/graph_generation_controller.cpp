@@ -43,8 +43,8 @@ GraphGenerationController::Worker::~Worker() {
 GraphGenerationController::GraphGenerationController(
     int threads_count,
     int graphs_count,
-    GraphGenerator::Params graphGenerator_params)
-    : graphsCount_(graphs_count), graphGenerator_(graphGenerator_params) {
+    GraphGenerator::Params graphGeneratorParams)
+    : graphsCount_(graphs_count), graphGenerator_(graphGeneratorParams) {
   int const workers_count = std::min(threads_count, graphs_count);
   for (int worker_number = 0; worker_number < workers_count; worker_number++) {
     workers_.emplace_back(
@@ -84,14 +84,11 @@ void GraphGenerationController::generate(
       jobsDone++;
     });
   }
-
   for (auto& worker : workers_) {
     worker.start();
   }
-
   while (jobsDone < graphsCount_) {
   }
-
   for (auto& worker : workers_) {
     worker.stop();
   }

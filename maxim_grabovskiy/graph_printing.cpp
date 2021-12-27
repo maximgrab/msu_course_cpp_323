@@ -4,7 +4,7 @@
 #include <sstream>
 #include "graph_json_printing.hpp"
 namespace {
-static const std::array<uni_course_cpp::Graph::Edge::Color, 5> colors = {
+static const std::array<uni_course_cpp::Graph::Edge::Color, 4> colors = {
     uni_course_cpp::Graph::Edge::Color::Gray,
     uni_course_cpp::Graph::Edge::Color::Green,
     uni_course_cpp::Graph::Edge::Color::Yellow,
