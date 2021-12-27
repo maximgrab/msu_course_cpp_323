@@ -166,12 +166,9 @@ void GraphGenerator::generateRedEdges(Graph& graph, std::mutex& mutex) const {
   for (auto vertex : graph.getVertexes()) {
     if (graph.getDepth(vertex.id) < params_.depth - 2 &&
         checkProbability(RED_GENERATION_PROBABILITY)) {
-      std::vector<uni_course_cpp::VertexId> nextVertexesIds;
-      {
-        std::lock_guard<std::mutex> const lock(mutex);
-        nextVertexesIds =
-            graph.getVertexIdByDepth(graph.getDepth(vertex.id) + 2);
-      }
+      auto const nextVertexesIds = getUnconnectedVertexIds(
+          vertex.id, graph.getVertexIdByDepth(graph.getDepth(vertex.id) + 2),
+          graph);
       if (nextVertexesIds.size() > 0) {
         std::lock_guard<std::mutex> const lock(mutex);
         graph.addEdge(

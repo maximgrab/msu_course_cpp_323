@@ -4,7 +4,7 @@
 #include <sstream>
 #include "graph_json_printing.hpp"
 namespace {
-static const std::array<uni_course_cpp::Graph::Edge::Color, 4> colors = {
+static const std::array<uni_course_cpp::Graph::Edge::Color, 5> colors = {
     uni_course_cpp::Graph::Edge::Color::Gray,
     uni_course_cpp::Graph::Edge::Color::Green,
     uni_course_cpp::Graph::Edge::Color::Yellow,
@@ -32,7 +32,7 @@ std::string GraphPrinter::printGraph(const uni_course_cpp::Graph& graph) {
   std::stringstream out;
   out << "{"
       << "\n"
-      << "  depth: " << std::to_string(graph.getCurrentDepth() - 1) << ",\n";
+      << "depth: " << std::to_string(graph.getCurrentDepth() - 1) << ",\n";
   out << "  verticles: {amount:" << graph.getVertexes().size()
       << " distribution: [";
   for (int i = 0; i < graph.getCurrentDepth(); i++)
@@ -45,9 +45,8 @@ std::string GraphPrinter::printGraph(const uni_course_cpp::Graph& graph) {
         << std::to_string(graph.getColorDistribution(color).size()) << ", ";
   }
   out.seekp(-2, std::ios_base::end);
-  out << "]}\n}";
-  out << "\n";
+  out << "]}\n";
+  out << "\n}";
   return out.str();
 }
-
 }  // namespace uni_course_cpp
