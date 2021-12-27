@@ -1,6 +1,7 @@
 #pragma once
 
 #include <fstream>
+#include <mutex>
 namespace uni_course_cpp {
 class Logger {
  public:
@@ -12,6 +13,7 @@ class Logger {
   void log(const std::string& log_string);
 
  private:
+  std::mutex log_mutex_;
   Logger();
   Logger(const Logger&) = delete;
   Logger& operator=(const Logger&) = delete;

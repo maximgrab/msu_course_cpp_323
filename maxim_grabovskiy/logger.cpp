@@ -3,6 +3,7 @@
 #include <ctime>
 #include <iomanip>
 #include <iostream>
+#include <mutex>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -19,7 +20,6 @@ std::string get_current_date_time() {
 }  // namespace
 
 namespace uni_course_cpp {
-
 Logger::Logger() : file_(config::kLoggerFilePath) {
   if (!file_.is_open()) {
     throw std::runtime_error("File error");
@@ -31,6 +31,7 @@ Logger::~Logger() {
 }
 
 void Logger::log(const std::string& string) {
+  const std::lock_guard<std::mutex> lock(log_mutex_);
   std::cout << get_current_date_time() << " " << string << "\n";
   file_ << get_current_date_time() << " " << string << "\n";
 }

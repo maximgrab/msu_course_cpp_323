@@ -68,8 +68,7 @@ void GraphGenerationController::generate(
 
   for (int graphNumber = 0; graphNumber < graphsCount_; graphNumber++) {
     jobs_.emplace_back([&genStartedCallback = genStartedCallback,
-                        &genFinishedCallback = genFinishedCallback,
-                        graphNumber,
+                        &genFinishedCallback = genFinishedCallback, graphNumber,
                         &finishCallbackMutex_ = finishCallbackMutex_,
                         &startCallbackMutex_ = startCallbackMutex_,
                         &graphGenerator_ = graphGenerator_, &jobsDone]() {
